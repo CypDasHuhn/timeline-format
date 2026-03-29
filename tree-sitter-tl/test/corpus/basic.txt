@@ -1,0 +1,213 @@
+================================================================================
+Simple section with timed entries
+================================================================================
+26-03-28 | #actual
+---
+10:30 @ #wake-up
+11:00 @ #eat
+23:00 @ #sleep
+---
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (section
+    (section_header
+      (section_name)
+      (tag_ref))
+    (entry
+      (time)
+      (tag_or_wildcard (tag_ref)))
+    (entry
+      (time)
+      (tag_or_wildcard (tag_ref)))
+    (entry
+      (time)
+      (tag_or_wildcard (tag_ref)))))
+
+================================================================================
+Entry with explicit duration
+================================================================================
+26-03-28 | #actual
+---
+18:50 20min #uml-state
+@ 30min #gct
+---
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (section
+    (section_header
+      (section_name)
+      (tag_ref))
+    (entry
+      (time)
+      (duration)
+      (tag_or_wildcard (tag_ref)))
+    (entry
+      (duration)
+      (tag_or_wildcard (tag_ref)))))
+
+================================================================================
+Sub-entries with percentage
+================================================================================
+26-03-28 | #actual
+---
+22:15 @
+- 70% @ #slack
+- 20% @ #dotfiles
+- 10% @ #eat
+---
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (section
+    (section_header
+      (section_name)
+      (tag_ref))
+    (entry
+      (time))
+    (entry
+      (sub_marker)
+      (percentage)
+      (tag_or_wildcard (tag_ref)))
+    (entry
+      (sub_marker)
+      (percentage)
+      (tag_or_wildcard (tag_ref)))
+    (entry
+      (sub_marker)
+      (percentage)
+      (tag_or_wildcard (tag_ref)))))
+
+================================================================================
+Sub-entries with fill-in time and duration
+================================================================================
+26-03-28 | #plan
+---
+14:40 @ #emily-home
+- @ 2h20m #learn
+- @ @ #slack
+---
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (section
+    (section_header
+      (section_name)
+      (tag_ref))
+    (entry
+      (time)
+      (tag_or_wildcard (tag_ref)))
+    (entry
+      (sub_marker)
+      (duration)
+      (tag_or_wildcard (tag_ref)))
+    (entry
+      (sub_marker)
+      (tag_or_wildcard (tag_ref)))))
+
+================================================================================
+Wildcard tag
+================================================================================
+26-03-28 | #actual
+---
+11:30 @ _
+- 35% @ #slack
+- 60% @ #dotfiles
+---
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (section
+    (section_header
+      (section_name)
+      (tag_ref))
+    (entry
+      (time)
+      (tag_or_wildcard (wildcard)))
+    (entry
+      (sub_marker)
+      (percentage)
+      (tag_or_wildcard (tag_ref)))
+    (entry
+      (sub_marker)
+      (percentage)
+      (tag_or_wildcard (tag_ref)))))
+
+================================================================================
+Multiple tags on an entry
+================================================================================
+26-03-28 | #actual #location
+---
+13:40 @ #travel #emily
+---
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (section
+    (section_header
+      (section_name)
+      (tag_ref)
+      (tag_ref))
+    (entry
+      (time)
+      (tag_or_wildcard (tag_ref))
+      (tag_or_wildcard (tag_ref)))))
+
+================================================================================
+Line and block comments
+================================================================================
+// Total learned: 4h
+
+/*
+block comment
+*/
+
+26-03-28 | #actual
+---
+10:30 @ #wake-up
+---
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (comment (line_comment))
+  (comment (block_comment))
+  (section
+    (section_header
+      (section_name)
+      (tag_ref))
+    (entry
+      (time)
+      (tag_or_wildcard (tag_ref)))))
+
+================================================================================
+GCT block
+================================================================================
+```gct
+tag wake-up
+tag eat
+```
+
+26-03-28 | #actual
+---
+10:30 @ #wake-up
+---
+
+--------------------------------------------------------------------------------
+
+(source_file
+  (gct_block)
+  (section
+    (section_header
+      (section_name)
+      (tag_ref))
+    (entry
+      (time)
+      (tag_or_wildcard (tag_ref)))))
