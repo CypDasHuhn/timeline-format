@@ -203,7 +203,8 @@ tag eat
 --------------------------------------------------------------------------------
 
 (source_file
-  (gct_block)
+  (gct_block
+    (gct_content))
   (section
     (section_header
       (section_name)

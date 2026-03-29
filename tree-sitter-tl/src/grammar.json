@@ -23,10 +23,27 @@
       }
     },
     "gct_block": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "```gct"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "gct_content"
+        },
+        {
+          "type": "STRING",
+          "value": "```"
+        }
+      ]
+    },
+    "gct_content": {
       "type": "TOKEN",
       "content": {
         "type": "PATTERN",
-        "value": "```gct\\n[^`]*```"
+        "value": "[^`]*"
       }
     },
     "section": {

@@ -20,7 +20,12 @@ module.exports = grammar({
     source_file: ($) => repeat(choice($.gct_block, $.section, $.comment)),
 
     // Fenced GCT block: ```gct\n...\n```
-    gct_block: (_) => token(/```gct\n[^`]*```/),
+    // Split into fence + content so the GCT parser can be injected into gct_content.
+    gct_block: ($) => seq("```gct", $.gct_content, "```"),
+
+    // Raw GCT content between the fences (no backticks allowed inside).
+    // Matched as a single token so internal newlines are preserved.
+    gct_content: (_) => token(/[^`]*/),
 
     // ─── Section ──────────────────────────────────────────────────────────────
     section: ($) =>
